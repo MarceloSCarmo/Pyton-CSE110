@@ -2,6 +2,8 @@
 print(f"What is the year and country that has the lowest life expectancy in the dataset?\n")
 
 chosen_year = input(f'Enter the year of interest: ')
+print('\n')
+chosen_country = input(f'Choose a country: ')
 
 with open("w11/life-expectancy.csv") as spanish_flu_file:           #Accessing the file
     
@@ -23,6 +25,13 @@ with open("w11/life-expectancy.csv") as spanish_flu_file:           #Accessing t
     lowest_chosen_country = ""                  #Will show up the country with lowest life expectancy in the year chosen by the user
     lowest_chosen_life_expectancy = 100         ##Will show up the lowest life expectancy in the year and country chosen by the user
 
+    max_life_expectancy = 0                     #Showing Creativity and Exceeding Requirements
+    min_life_expectancy = 100
+    average_user_chooice = 0
+    count_user_choice = 0                       #variable that will count the expectancy
+    count_times = 0                             ##Calculate how many times life expectancy will be counted
+
+
     next(spanish_flu_file)
     for file in spanish_flu_file:               #Entity,Code,Year,Life expectancy (years)
         clean_data = file.strip()
@@ -33,6 +42,7 @@ with open("w11/life-expectancy.csv") as spanish_flu_file:           #Accessing t
         code = data[1]
         year = data[2]
         life_expectancy = float(data[3])
+
 
         if life_expectancy < lowest_life_expectancy:            #Finding lowest life expectancy in general
             
@@ -58,9 +68,21 @@ with open("w11/life-expectancy.csv") as spanish_flu_file:           #Accessing t
                 lowest_chosen_life_expectancy = life_expectancy
                 lowest_chosen_country = entity                                  #Finding the country with lowest life expectancy in the year the user chose
 
+        if chosen_country == entity:                                            #Showing Creativity and Exceeding Requirements
+            if life_expectancy > max_life_expectancy:                           #maximum life expectancy since the country the user typed
+                max_life_expectancy = life_expectancy                                
+
+            if life_expectancy < min_life_expectancy:                           #manimum life expectancy since the country the user typed
+                min_life_expectancy = life_expectancy
+            
+            count_times += 1            
+            count_user_choice += life_expectancy
+
+    average_user_chooice = count_user_choice / count_times                          #Calculating the life expectancy average since the country the user typed
 
     average_life_expectancy = count_expectancy / count_life_expectancy_times        #Calculating the life expectancy average since the year the user typed
 
+    print('\n')
 
     print(f'Min life expectancy: {lowest_life_expectancy}, Country: {lowest_country}, Year:{lowest_year}\n')
     print(f'Max life expectancy: {highest_life_expectancy}, Country: {highest_country}, Year:{highest_year}\n')
@@ -69,4 +91,12 @@ with open("w11/life-expectancy.csv") as spanish_flu_file:           #Accessing t
     print(f'The average life expectancy across all countries was {average_life_expectancy:.2f}')
     print(f'The max life expectancy was in {highest_chosen_country} with {highest_chosen_life_expectancy}\n')
     print(f'The min life expectancy was in {lowest_chosen_country} with {lowest_chosen_life_expectancy}\n')
+
+
+    print(f'\nSecond part of the assignment')
+    print(f'The min life expectancy {lowest_life_expectancy}')
+    print(f'The max life expectancy {highest_life_expectancy}\n')
+
+    
+    print(f'Your chosen country: {chosen_country}, minimum life expectancy: {min_life_expectancy:.2f}, maximum life expectancy: {max_life_expectancy:.2f} and the average: {average_user_chooice:.2f} ')
     
